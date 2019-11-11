@@ -15,25 +15,16 @@ typedef unsigned int size_t;
 extern int _put_char(int ch) __attribute__((weak));
 
 ssize_t _write(int fd, const void* ptr, size_t len) {
-	const uint8_t * current = (const uint8_t *) ptr;
-
-//	if (isatty(fd)) 
-	{
-		for (size_t jj = 0; jj < len; jj++) {
-			_put_char(current[jj]);
-
-			if (current[jj] == '\n') {
-				_put_char('\r');
-			}
-		}
-		return len;
-	}
-
-	return _stub(EBADF);
+    (void)fd;
+    const uint8_t * current = (const uint8_t *) ptr;
+    for (size_t jj = 0; jj < len; jj++) {
+        _put_char(current[jj]);
+    }
+    return len;
 }
 
 int puts(const char* string) {
-	return _write(0, (const void *) string, strlen(string));
+    return _write(0, (const void *) string, strlen(string));
 }
 
 int _put_char(int ch)

@@ -9,7 +9,8 @@ void write_hex(int fd, unsigned long int hex);
 
 static inline int _stub(int err)
 {
-  return -1;
+    (void)err;
+    return -1;
 }
 
 

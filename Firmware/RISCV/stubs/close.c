@@ -5,5 +5,6 @@
 
 int _close(int fd)
 {
-  return _stub(EBADF);
+    (void)fd;
+    return _stub(EBADF);
 }

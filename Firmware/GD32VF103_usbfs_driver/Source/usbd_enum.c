@@ -35,6 +35,8 @@ OF SUCH DAMAGE.
 #include "../Include/usbd_enum.h"
 #include "../Include/usb_ch9_std.h"
 
+#define unused(x) (void)(x)
+
 static usb_reqsta _usb_std_getstatus        (usb_core_driver *udev, usb_req *req);
 static usb_reqsta _usb_std_setaddress       (usb_core_driver *udev, usb_req *req);
 static usb_reqsta _usb_std_setconfiguration (usb_core_driver *udev, usb_req *req);
@@ -117,8 +119,8 @@ usb_reqsta  usbd_class_request (usb_core_driver *udev, usb_req *req)
 */
 usb_reqsta  usbd_vendor_request (usb_core_driver *udev, usb_req *req)
 {
-    /* added by user... */
-
+    unused(udev);
+    unused(req);
     return REQ_SUPP;
 }
 
@@ -131,8 +133,8 @@ usb_reqsta  usbd_vendor_request (usb_core_driver *udev, usb_req *req)
 */
 static usb_reqsta _usb_std_reserved (usb_core_driver *udev, usb_req *req)
 {
-    /* no operation... */
-
+    unused(udev);
+    unused(req);
     return REQ_NOTSUPP;
 }
 
@@ -145,8 +147,8 @@ static usb_reqsta _usb_std_reserved (usb_core_driver *udev, usb_req *req)
 */
 static uint8_t* _usb_dev_desc_get (usb_core_driver *udev, uint8_t index, uint16_t *len)
 {
+    unused(index);
     *len = udev->dev.desc.dev_desc[0];
-
     return udev->dev.desc.dev_desc;
 }
 
@@ -159,8 +161,8 @@ static uint8_t* _usb_dev_desc_get (usb_core_driver *udev, uint8_t index, uint16_
 */
 static uint8_t* _usb_config_desc_get (usb_core_driver *udev, uint8_t index, uint16_t *len)
 {
+    unused(index);
     *len = udev->dev.desc.config_desc[2];
-
     return udev->dev.desc.config_desc;
 }
 
@@ -173,8 +175,8 @@ static uint8_t* _usb_config_desc_get (usb_core_driver *udev, uint8_t index, uint
 */
 static uint8_t* _usb_bos_desc_get (usb_core_driver *udev, uint8_t index, uint16_t *len)
 {
+    unused(index);
     *len = udev->dev.desc.bos_desc[2];
-
     return udev->dev.desc.bos_desc;
 }
 
@@ -483,7 +485,8 @@ static usb_reqsta _usb_std_getdescriptor (usb_core_driver *udev, usb_req *req)
 */
 static usb_reqsta _usb_std_setdescriptor (usb_core_driver *udev, usb_req *req)
 {
-    /* no handle... */
+    unused(udev);
+    unused(req);
     return REQ_SUPP;
 }
 
@@ -496,6 +499,7 @@ static usb_reqsta _usb_std_setdescriptor (usb_core_driver *udev, usb_req *req)
 */
 static usb_reqsta _usb_std_getconfiguration (usb_core_driver *udev, usb_req *req)
 {
+    unused(req);
     usb_transc *transc = &udev->dev.transc_in[0];
 
     switch (udev->dev.cur_status) {
@@ -651,7 +655,8 @@ static usb_reqsta _usb_std_setinterface (usb_core_driver *udev, usb_req *req)
 */
 static usb_reqsta _usb_std_synchframe (usb_core_driver *udev, usb_req *req)
 {
-    /* no handle... */
+    unused(udev);
+    unused(req);
     return REQ_SUPP;
 }
 
@@ -664,9 +669,9 @@ static usb_reqsta _usb_std_synchframe (usb_core_driver *udev, usb_req *req)
 */
 void usbd_enum_error (usb_core_driver *udev, usb_req *req)
 {
+    unused(req);
     usbd_ep_stall (udev, 0x80);
     usbd_ep_stall (udev, 0x00);
-
     usb_ctlep_startout(udev);
 }
 

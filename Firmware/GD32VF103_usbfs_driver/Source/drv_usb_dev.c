@@ -212,8 +212,7 @@ usb_status usb_devint_enable (usb_core_driver *udev)
     if (USB_USE_FIFO == udev->bp.transfer_mode) {
         udev->regs.gr->GINTEN |= GINTEN_RXFNEIE;
     }
-    udev->regs.gr->GINTEN |= GINTEN_RSTIE | GINTEN_ENUMFIE | GINTEN_IEPIE |\
-                              GINTEN_OEPIE | GINTEN_SOFIE | GINTEN_MFIE;
+    udev->regs.gr->GINTEN |= GINTEN_RSTIE | GINTEN_ENUMFIE | GINTEN_IEPIE | GINTEN_OEPIE | GINTEN_SOFIE | GINTEN_MFIE;
 
 #ifdef VBUS_SENSING_ENABLED
     udev->regs.gr->GINTEN |= GINTEN_SESIE | GINTEN_OTGIE;
