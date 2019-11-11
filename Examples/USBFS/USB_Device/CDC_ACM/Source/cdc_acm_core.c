@@ -76,12 +76,12 @@ const usb_desc_dev device_descriptor =
      },
     .bcdUSB = 0x0200,
     .bDeviceClass = 0x02,
-    .bDeviceSubClass = 0x00,
+    .bDeviceSubClass = 0x02,
     .bDeviceProtocol = 0x00,
     .bMaxPacketSize0 = USB_FS_EP0_MAX_LEN,
     .idVendor = USBD_VID,
     .idProduct = USBD_PID,
-    .bcdDevice = 0x0100,
+    .bcdDevice = 0x0200,
     .iManufacturer = STR_IDX_MFC,
     .iProduct = STR_IDX_PRODUCT,
     .iSerialNumber = STR_IDX_SERIAL,
@@ -102,7 +102,7 @@ usb_descriptor_configuration_set_struct configuration_descriptor =
         .bNumInterfaces = 0x02,
         .bConfigurationValue = 0x01,
         .iConfiguration = 0x00,
-        .bmAttributes = 0x80,
+        .bmAttributes = 0xC0,
         .bMaxPower = 0x32
     },
 
@@ -178,7 +178,7 @@ usb_descriptor_configuration_set_struct configuration_descriptor =
         .bEndpointAddress = CDC_ACM_CMD_EP,
         .bmAttributes = 0x03,
         .wMaxPacketSize = CDC_ACM_CMD_PACKET_SIZE,
-        .bInterval = 0x0A
+        .bInterval = 0x10
     },
 
     .cdc_loopback_data_interface = 
